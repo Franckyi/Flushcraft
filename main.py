@@ -55,11 +55,16 @@ if __name__ == '__main__':
     print('Flushing pack image')
     flush_image(os.path.join(zip_dest, 'pack.png'))
 
-    print('Flushing block textures')
-    flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'block'))
-
-    print('Flushing item textures')
-    flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'item'))
+    if pack['pack']['pack_format'] > 3:
+        print('Flushing block textures')
+        flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'block'))
+        print('Flushing item textures')
+        flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'item'))
+    else:
+        print('Flushing block textures')
+        flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'blocks'))
+        print('Flushing item textures')
+        flush_directory(os.path.join(zip_dest, 'assets', 'minecraft', 'textures', 'items'))
 
     print('Zipping pack')
     shutil.make_archive('%s_Flushed' % zip_dest, 'zip', zip_dest)
